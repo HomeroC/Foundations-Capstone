@@ -1,0 +1,21 @@
+html {
+    background-color: #264653;
+}
+
+nav {
+    padding: 30px;
+    background-color: #e9c46a;
+    display: flex;  
+    justify-content: flex-start;
+    gap: 30px;
+}
+
+p {
+    font-size: 25px;
+}
+
+#form-container {
+    display: flex;
+    justify-content: center;
+    margin: 30px;
+}
