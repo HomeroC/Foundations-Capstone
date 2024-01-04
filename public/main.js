@@ -1,5 +1,7 @@
+
 const form = document.getElementById("form-container")
 const searchBtn = document.getElementById("search-btn")
+const allAnimeBtn = document.getElementById("allAnime-btn")
 const searchInput = document.getElementById("search-input")
 const animeContainer = document.getElementById("anime-container")
 
@@ -12,21 +14,51 @@ const getAllAnime = () => {
         .then(res => {
             let anime = res.data.data
             console.log(anime)
-            displayAnime(anime)
+            displayAllAnime(anime)
 
         })
 }
-
 //display all anime
-const displayAnime = (anime) => {
+const displayAllAnime = (anime) => {
     animeContainer.innerHTML = ""
-    anime.forEach(anime => {
-        let animeTitle = document.createElement("h1")
-        animeTitle.textContent = anime.title
-        animeContainer.appendChild(animeTitle)
-    })
+    anime.forEach(anime => createAnimeCard(anime))
+}
+
+
+//display searched anime
+const displaySearch = (anime) => { 
+    animeContainer.innerHTML = ""
+    anime.forEach(anime => createAnimeCard(anime))
 }
 
 
 
-getAllAnime()
+//create anime card
+const createAnimeCard = (anime) => {
+    console.log(anime.image_url)
+
+    let animeCard = document.createElement("div")
+    animeCard.classList.add("anime-card")
+    animeCard.innerHTML = `
+    <img id="anime-img" src="${anime.image_url}" />
+    <h1 id="anime-title">${anime.title}</h1>
+    <p id="anime-syn">${anime.synopsis}</p>
+    `
+    animeContainer.appendChild(animeCard)
+}
+
+const handleSubmit = (e) => {
+    e.preventDefault()
+   
+    axios
+        .get(`${baseUrl}?search=${searchInput.value}`)
+        .then(res => {
+            let anime = res.data.data
+            console.log(anime)
+            displaySearch(anime)
+        })
+}
+
+
+searchBtn.addEventListener('click', handleSubmit);
+allAnimeBtn.addEventListener('click', getAllAnime);

@@ -19,3 +19,79 @@ p {
     justify-content: center;
     margin: 30px;
 }
+
+.anime-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #2a9d8f;
+    border-radius: 10px;
+    box-sizing: border-box;
+    padding: 30px;
+    margin: 30px;
+    width: 600px;
+    height: 600px;
+}
+
+#anime-title {
+    font-size: 30px;
+    font-weight: bold;
+    color: #e76f51;
+}
+
+#anime-syn {
+    font-size: 20px;
+}
+
+#anime-img {
+    width: 300px;
+    height: 300px;
+    border-radius: 10px;
+}
+
+#anime-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+#search-input {
+    width: 500px;
+    height: 50px;
+    border-radius: 10px;
+    border: none;
+    padding: 10px;
+    font-size: 20px;
+}
+
+#search-btn {
+    background-color: #e76f51;
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #264653;
+    cursor: pointer;
+}
+
+#allAnime-btn {
+    background-color: #e76f51;
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #264653;
+    cursor: pointer;
+
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}

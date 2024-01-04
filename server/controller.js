@@ -1,5 +1,5 @@
 module.exports = {
-    //handler function for get request
+   
     getAllAnime: (req, res) => {
         let anime = res.data.data
             
@@ -11,6 +11,15 @@ module.exports = {
         res.status(200).send(anime)
     },
     
+    getAnimeById: (req, res) => {
+        let anime = res.data.data
+
+        for (let i = 0; i < anime.length; i++) { 
+            if (anime[i].id === parseInt(req.params.id)) {
+                res.status(200).send(anime[i])
+            }
+        }
+    },
     
 
 }
