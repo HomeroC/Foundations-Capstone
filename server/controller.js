@@ -1,6 +1,6 @@
 module.exports = {
    
-    getAllAnime: (req, res) => {
+    getPopularAnime: (req, res) => {
         let anime = res.data.data
             
         for(let i = 0; i < anime.length; i++) {

@@ -5,12 +5,12 @@ const allAnimeBtn = document.getElementById("allAnime-btn")
 const searchInput = document.getElementById("search-input")
 const animeContainer = document.getElementById("anime-container")
 
-const baseUrl = "https://api.jikan.moe/v4/anime"
+const baseUrl = "https://api.jikan.moe/v4"
 
-//get all anime 
-const getAllAnime = () => {
+//get popular anime 
+const getPopularAnime = () => {
     axios
-        .get(baseUrl)
+        .get(`${baseUrl}/top/anime`)
         .then(res => {
             let anime = res.data.data
             console.log(anime)
@@ -35,14 +35,13 @@ const displaySearch = (anime) => {
 
 //create anime card
 const createAnimeCard = (anime) => {
-    console.log(anime.image_url)
 
     let animeCard = document.createElement("div")
     animeCard.classList.add("anime-card")
     animeCard.innerHTML = `
-    <img id="anime-img" src="${anime.image_url}" />
+    <img id="anime-img" src="${anime.images.jpg.large_image_url}" />
     <h1 id="anime-title">${anime.title}</h1>
-    <p id="anime-syn">${anime.synopsis}</p>
+    
     `
     animeContainer.appendChild(animeCard)
 }
@@ -51,7 +50,7 @@ const handleSubmit = (e) => {
     e.preventDefault()
    
     axios
-        .get(`${baseUrl}?search=${searchInput.value}`)
+        .get(`${baseUrl}/anime/?search=${searchInput.value}/full`)
         .then(res => {
             let anime = res.data.data
             console.log(anime)
@@ -61,4 +60,4 @@ const handleSubmit = (e) => {
 
 
 searchBtn.addEventListener('click', handleSubmit);
-allAnimeBtn.addEventListener('click', getAllAnime);
+allAnimeBtn.addEventListener('click', getPopularAnime);
