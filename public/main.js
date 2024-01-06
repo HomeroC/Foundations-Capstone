@@ -5,14 +5,14 @@ const allAnimeBtn = document.getElementById("allAnime-btn")
 const searchInput = document.getElementById("search-input")
 const animeContainer = document.getElementById("anime-container")
 
-const baseUrl = "https://api.jikan.moe/v4"
+const baseUrl = "http://localhost:4004"
 
 //get popular anime 
 const getPopularAnime = () => {
     axios
-        .get(`${baseUrl}/top/anime`)
+        .get(`${baseUrl}/popular`)
         .then(res => {
-            let anime = res.data.data
+            let anime = res.data
             console.log(anime)
             displayAllAnime(anime)
 
@@ -25,22 +25,19 @@ const displayAllAnime = (anime) => {
 }
 
 
-//display searched anime
-const displaySearch = (anime) => { 
-    animeContainer.innerHTML = ""
-    anime.forEach(anime => createAnimeCard(anime))
-}
-
-
-
 //create anime card
 const createAnimeCard = (anime) => {
 
+    let title = anime.title
+    if (title.length > 15) {
+        title = title.substring(0, 15) + "..."
+        }
+        
     let animeCard = document.createElement("div")
     animeCard.classList.add("anime-card")
     animeCard.innerHTML = `
     <img id="anime-img" src="${anime.images.jpg.large_image_url}" />
-    <h1 id="anime-title">${anime.title}</h1>
+    <h1 id="anime-title">${title}</h1>
     
     `
     animeContainer.appendChild(animeCard)
@@ -50,11 +47,11 @@ const handleSubmit = (e) => {
     e.preventDefault()
    
     axios
-        .get(`${baseUrl}/anime/?search=${searchInput.value}/full`)
+        .get(`${baseUrl}/search?animeName=${searchInput.value}`)
         .then(res => {
-            let anime = res.data.data
+            let anime = res.data
             console.log(anime)
-            displaySearch(anime)
+            displayAllAnime(anime) 
         })
 }
 
