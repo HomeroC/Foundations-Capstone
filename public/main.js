@@ -39,12 +39,15 @@ const createAnimeCard = (anime) => {
     animeImage.id = "anime-img";
     animeImage.src = anime.images.jpg.large_image_url;
     animeImage.addEventListener("click", () => {
-        window.open(anime.url, "_blank");
+        localStorage.setItem("anime", JSON.stringify(anime));
+        window.location.href = 'anime.html';
     });
+    
 
     let animeTitle = document.createElement("h1");
     animeTitle.id = "anime-title";
     animeTitle.textContent = title;
+
 
     animeCard.appendChild(animeImage);
     animeCard.appendChild(animeTitle);
