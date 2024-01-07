@@ -25,6 +25,17 @@ module.exports = {
             response.status(200).send(anime)
         })
     },
-    
+
+    addToWatchlist: (request, response) => {
+        let { anime } = request.body 
+        axios
+            .get(`${baseUrl}/anime?q=${anime}`)
+            .then(res => {
+                let anime = res.data.data
+                
+                response.status(200).send(anime)
+            })
+    },
+
 
 }

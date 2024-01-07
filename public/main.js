@@ -27,20 +27,29 @@ const displayAllAnime = (anime) => {
 
 //create anime card
 const createAnimeCard = (anime) => {
-
-    let title = anime.title
+    let title = anime.title;
     if (title.length > 15) {
-        title = title.substring(0, 15) + "..."
-        }
-        
-    let animeCard = document.createElement("div")
-    animeCard.classList.add("anime-card")
-    animeCard.innerHTML = `
-    <img id="anime-img" src="${anime.images.jpg.large_image_url}" />
-    <h1 id="anime-title">${title}</h1>
-    
-    `
-    animeContainer.appendChild(animeCard)
+        title = title.substring(0, 15) + "...";
+    }
+
+    let animeCard = document.createElement("div");
+    animeCard.classList.add("anime-card");
+
+    let animeImage = document.createElement("img");
+    animeImage.id = "anime-img";
+    animeImage.src = anime.images.jpg.large_image_url;
+    animeImage.addEventListener("click", () => {
+        window.open(anime.url, "_blank");
+    });
+
+    let animeTitle = document.createElement("h1");
+    animeTitle.id = "anime-title";
+    animeTitle.textContent = title;
+
+    animeCard.appendChild(animeImage);
+    animeCard.appendChild(animeTitle);
+
+    animeContainer.appendChild(animeCard);
 }
 
 const handleSubmit = (e) => {
@@ -55,6 +64,14 @@ const handleSubmit = (e) => {
         })
 }
 
+//add anime to watchlist
+const addToWatchList = (anime) => {
+    axios
+        .post(`${baseUrl}/watchlist`, { anime })
+        .then(res => {
+            console.log(res.data)
+        })
+}
 
 searchBtn.addEventListener('click', handleSubmit);
 allAnimeBtn.addEventListener('click', getPopularAnime);

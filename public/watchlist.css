@@ -1,0 +1,35 @@
+html {
+    background-color: #264653;
+}
+
+nav {
+    padding: 30px;
+    background-color: #e9c46a;
+    display: flex;  
+    justify-content: flex-start;
+    gap: 30px;
+}
+
+p {
+    font-size: 25px;
+}
+#title {
+    font-size: 40px;
+    font-weight: bold;
+    color: black;
+    text-shadow: 0px 0px 10px 0px black;    
+}
+
+#home-nav {
+    font-size: 25px;
+    color: black;
+    text-shadow: 0px 0px 10px 0px black;    
+}
+
+#watchlist-nav {
+    font-size: 25px;
+    color: black;
+    text-shadow: 0px 0px 10px 0px black;    
+}
+
+
