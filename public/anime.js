@@ -57,15 +57,6 @@ const displayAnime = () => {
     main.appendChild(addBtn);
  }
 
-// const addToWatchlist = () => { 
-//     axios.post(`${baseUrl}/watchlist`, { anime })
-//         .then(res => {
-//             let anime = res.data
-            
-//             localStorage.setItem("anime", JSON.stringify(anime));
-//             window.location.href = 'watchlist.html';
-//         })
-// }
 
  displayAnime(anime)
 

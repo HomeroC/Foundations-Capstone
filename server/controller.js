@@ -28,9 +28,13 @@ module.exports = {
 
     addToWatchlist: (request, response) => {
         let { anime } = request.body
-        console.log(anime)
-        response.status(200).send(anime)
-    },
+        
+        axios
+            .post(`${baseUrl}/anime`, { anime })
+            .then(res => {
+                response.status(200).send(res.data)
+            })
 
+    }
 
 }
