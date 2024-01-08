@@ -67,14 +67,7 @@ const handleSubmit = (e) => {
         })
 }
 
-//add anime to watchlist
-const addToWatchList = (anime) => {
-    axios
-        .post(`${baseUrl}/watchlist`, { anime })
-        .then(res => {
-            console.log(res.data)
-        })
-}
+
 
 searchBtn.addEventListener('click', handleSubmit);
 allAnimeBtn.addEventListener('click', getPopularAnime);

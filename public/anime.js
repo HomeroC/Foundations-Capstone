@@ -1,8 +1,12 @@
+
 let anime = JSON.parse(localStorage.getItem('anime'));
 console.log(anime)
 
 const animeContainer = document.querySelector("#anime-container");
 const animeDetails = document.querySelector("#anime-details");
+const main = document.querySelector("#main");
+
+const baseUrl = "http://localhost:4004"
 
 const displayAnime = () => {
     let title = anime.title;
@@ -18,6 +22,7 @@ const displayAnime = () => {
     animeTitle.id = "anime-title";
     animeTitle.textContent = title;
 
+    
     animeCard.appendChild(animeImage);
     animeCard.appendChild(animeTitle);
     
@@ -34,12 +39,33 @@ const displayAnime = () => {
 
     let description = document.createElement("p");
     description.id = "description";
-    description.textContent = anime.synopsis
+    description.innerHTML = `Description: <br> <br> ${anime.synopsis}`
 
     animeDetails.appendChild(episodes);
     animeDetails.appendChild(rating);
     animeDetails.appendChild(description);
+
+    //watchlist button
+    let addBtn = document.createElement("button");
+    addBtn.id = "add-btn";
+    addBtn.textContent = "Add to Watchlist";
+    addBtn.addEventListener("click", () => {
+        localStorage.setItem("anime", JSON.stringify(anime));
+        window.location.href = 'watchlist.html';
+    })
+
+    main.appendChild(addBtn);
  }
+
+// const addToWatchlist = () => { 
+//     axios.post(`${baseUrl}/watchlist`, { anime })
+//         .then(res => {
+//             let anime = res.data
+            
+//             localStorage.setItem("anime", JSON.stringify(anime));
+//             window.location.href = 'watchlist.html';
+//         })
+// }
 
  displayAnime(anime)
 
