@@ -1,16 +1,24 @@
 const axios = require("axios")
 const baseUrl = "https://api.jikan.moe/v4"
 
+let currentPage = 1
+const itemsPerPage = 25
+
 module.exports = {
    
     getPopularAnime: (request, response) => {
         axios
-        .get(`${baseUrl}/top/anime`)
+            .get(`${baseUrl}/top/anime`, {
+                params: {
+                    page: currentPage,
+                    limit: itemsPerPage
+                }
+            
+        })
         .then(res => {
             let anime = res.data.data
-            
             response.status(200).send(anime)
-
+            // currentPage++
         })
     },
     
