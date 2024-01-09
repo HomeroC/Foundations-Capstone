@@ -15,6 +15,8 @@ const displayWatchlist = () => {
 
     watchlistContainer.innerHTML = '';
 
+    watchlist = watchlist.filter(anime => anime !== null);
+
     // Display each anime in the watchlist
     for (let anime of watchlist) {
         let title = anime.title;
@@ -50,6 +52,7 @@ const displayWatchlist = () => {
 const removeFromWatchlist = (anime) => {
     // get watchlist from localStorage
     let watchlist = JSON.parse(localStorage.getItem('watchlist')) || [];
+    watchlist = watchlist.filter(anime => anime !== null);
 
     let index = watchlist.findIndex(item => item.title === anime.title);
 
