@@ -5,7 +5,20 @@ let currentPage = 1
 const itemsPerPage = 25
 
 module.exports = {
-   
+    
+    getNextPage: (request, response) => {
+            currentPage++;
+            module.exports.getPopularAnime(request, response);
+        },
+    
+    getPreviousPage: (request, response) => {
+            if (currentPage > 1) {
+                currentPage--;
+            }
+            module.exports.getPopularAnime(request, response);
+        },
+    
+
     getPopularAnime: (request, response) => {
         axios
             .get(`${baseUrl}/top/anime`, {
@@ -18,7 +31,6 @@ module.exports = {
         .then(res => {
             let anime = res.data.data
             response.status(200).send(anime)
-            // currentPage++
         })
     },
     

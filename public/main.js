@@ -4,13 +4,22 @@ const searchBtn = document.getElementById("search-btn")
 const allAnimeBtn = document.getElementById("allAnime-btn")
 const searchInput = document.getElementById("search-input")
 const animeContainer = document.getElementById("anime-container")
+const greeting = document.getElementById("greeting")
+const intro = document.getElementById("intro")
+const buttonContainer = document.getElementById("button-container")
 
 const baseUrl = "http://localhost:4004"
 
 //get popular anime 
 const getPopularAnime = () => {
     axios
-        .get(`${baseUrl}/popular`)
+        .get(`${baseUrl}/popular`,
+            {
+                params: {
+                    page: currentPage,
+                }
+            
+            })
         .then(res => {
             let anime = res.data
             console.log(anime)
@@ -21,6 +30,9 @@ const getPopularAnime = () => {
 //display all anime
 const displayAllAnime = (anime) => {
     animeContainer.innerHTML = ""
+    greeting.innerHTML = ""
+    intro.innerHTML = ""
+
     anime.forEach(anime => createAnimeCard(anime))
 }
 
@@ -52,6 +64,7 @@ const createAnimeCard = (anime) => {
     animeCard.appendChild(animeImage);
     animeCard.appendChild(animeTitle);
 
+
     animeContainer.appendChild(animeCard);
 }
 
@@ -67,7 +80,58 @@ const handleSubmit = (e) => {
         })
 }
 
+let currentPage = 1
 
+const getNextPage = () => {
+    currentPage++;
+    axios
+        .get(`${baseUrl}/next`, {
+            params: {
+                page: currentPage
+            }
+        })
+        .then(res => {
+            let anime = res.data
+            console.log(anime)
+            displayAllAnime(anime)
+        })
+}
 
+const getPreviousPage = () => {
+    if (currentPage > 1) {
+        currentPage--;
+        axios
+            .get(`${baseUrl}/previous`, {
+                params: {
+                    page: currentPage
+                }
+            })
+            .then(res => {
+                let anime = res.data
+                console.log(anime)
+                displayAllAnime(anime)
+            })
+    }
+}
+//load page buttons
+const loadButtons = () => {
+ 
+    // next page button
+    let nextPageButton = document.createElement("button");
+    nextPageButton.textContent = "Next Page";
+    nextPageButton.id = "next-btn";
+    nextPageButton.addEventListener("click", getNextPage);
+
+    // previos page button
+    let prevPageButton = document.createElement("button");
+    prevPageButton.textContent = "Previous Page";
+    prevPageButton.id = "prev-btn";
+    prevPageButton.addEventListener("click", getPreviousPage);
+
+    // Add the buttons to the page
+    buttonContainer.appendChild(prevPageButton);
+    buttonContainer.appendChild(nextPageButton);
+}
 searchBtn.addEventListener('click', handleSubmit);
 allAnimeBtn.addEventListener('click', getPopularAnime);
+allAnimeBtn.addEventListener('click', loadButtons)
