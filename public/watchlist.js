@@ -5,8 +5,12 @@ const watchlistContainer = document.querySelector("#watchlist-container");
 //add anime to watchlist
 const addToWatchlist = () => { 
     let watchlist = JSON.parse(localStorage.getItem("watchlist")) || [];
-    watchlist.push(anime);
-    localStorage.setItem("watchlist", JSON.stringify(watchlist));
+
+    let animeId = anime.mal_id;
+    if (!watchlist.some(anime => anime.mal_id === animeId)){
+        watchlist.push(anime);
+        localStorage.setItem("watchlist", JSON.stringify(watchlist));
+    }
 }
 
 const displayWatchlist = () => {
