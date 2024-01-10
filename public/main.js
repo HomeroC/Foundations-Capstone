@@ -32,6 +32,8 @@ const displayAllAnime = (anime) => {
     animeContainer.innerHTML = ""
     greeting.innerHTML = ""
     intro.innerHTML = ""
+    nextPageButton.style.display = "block";
+    prevPageButton.style.display = "block";
 
     anime.forEach(anime => createAnimeCard(anime))
 }
@@ -113,25 +115,28 @@ const getPreviousPage = () => {
             })
     }
 }
-//load page buttons
-const loadButtons = () => {
+
+
  
-    // next page button
-    let nextPageButton = document.createElement("button");
-    nextPageButton.textContent = "Next Page";
-    nextPageButton.id = "next-btn";
-    nextPageButton.addEventListener("click", getNextPage);
+ // next page button
+let nextPageButton = document.createElement("button");
+nextPageButton.textContent = "Next Page";
+nextPageButton.id = "next-btn";
+nextPageButton.addEventListener("click", getNextPage);
 
     // previos page button
-    let prevPageButton = document.createElement("button");
-    prevPageButton.textContent = "Previous Page";
-    prevPageButton.id = "prev-btn";
-    prevPageButton.addEventListener("click", getPreviousPage);
+let prevPageButton = document.createElement("button");
+prevPageButton.textContent = "Previous Page";
+prevPageButton.id = "prev-btn";
+prevPageButton.addEventListener("click", getPreviousPage);
 
-    // Add the buttons to the page
-    buttonContainer.appendChild(prevPageButton);
-    buttonContainer.appendChild(nextPageButton);
-}
+// Add the buttons to the page
+buttonContainer.appendChild(prevPageButton);
+buttonContainer.appendChild(nextPageButton);
+
+nextPageButton.style.display = "none";
+prevPageButton.style.display = "none";
+
 searchBtn.addEventListener('click', handleSubmit);
 allAnimeBtn.addEventListener('click', getPopularAnime);
 allAnimeBtn.addEventListener('click', loadButtons)
